@@ -17,4 +17,9 @@
     "multer": "^1.4.2",
     "connect-flash": "^0.1.1",
     "geoip-lite": "^1.4.2",
-    "node-geocoder": "^3.27.0
+    "node-geocoder": "^3.27.0",
+    "stripe": "^8.143.0",
+    "dotenv": "^8.2.0"
+  }
+}
+
