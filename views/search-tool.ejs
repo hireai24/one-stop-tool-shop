@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Tools</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('partials/header') %>
+    <div class="container">
+        <h2>Search Tools for Rent</h2>
+        <form action="/tools/search" method="GET">
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" name="location" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Tool Name</label>
+                <input type="text" name="name">
+            </div>
+            <button type="submit">Search</button>
+        </form>
+        <div class="results">
+            <% if (tools && tools.length > 0) { %>
+                <% tools.forEach(tool => { %>
+                    <div class="tool">
+                        <h3><%= tool.name %></h3>
+                        <p><%= tool.description %></p>
+                        <p><%= tool.price %> per day</p>
+                        <p>Location: <%= tool.location %></p>
+                        <p>Available from: <%= tool.availability.toDateString() %></p>
+                        <img src="<%= tool.image %>" alt="<%= tool.name %>">
+                      </div>
+                  <% }) %>
+              <% } else { %>
+                  <p>No tools found.</p>
+              <% } %>
+          </div>
+      </div>
+      <%- include('partials/footer') %>
+  </body>
+  </html>
+

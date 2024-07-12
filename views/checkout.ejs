@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <%- include('partials/header') %>
+    <div class="container">
+        <h2>Checkout</h2>
+        <form action="/payment/charge" method="POST" id="payment-form">
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" name="description" required>
+            </div>
+            <div class="form-group">
+                <label for="amount">Amount (in cents)</label>
+                <input type="number" name="amount" required>
+            </div>
+            <div id="card-element"></div>
+            <button type="submit">Pay</button>
+        </form>
+    </div>
+    <%- include('partials/footer') %>
+    <script>
+        var stripe = Stripe('<%= stripePublicKey %>');
+        var elements = stripe.elements();
+        var card = elements.create('card');
+        card.mount('#card-element');
+
+        var form = document.getElementById('payment-form');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const { paymentIntent, error } = await stripe.confirmCardPayment('<%= clientSecret %>', {
+                payment_method: {
+                    card: card,
+                    billing_details: {
+                        name: '<%= user.name %>',
+                        email: '<%= user.email %>'
+                    }
+                }
+            });
+            if (error) {
+                console.log(error);
+            } else {
+                form.submit();
+            }
+        });
+    </script>
+</body>
+</html>

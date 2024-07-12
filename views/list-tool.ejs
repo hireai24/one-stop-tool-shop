@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List a Tool</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include('partials/header') %>
+    <div class="container">
+        <h2>List a Tool for Rent</h2>
+        <form action="/tools/list" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="name">Tool Name</label>
+                <input type="text" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" name="description" required>
+            </div>
+            <div class="form-group">
+                <label for="price">Price (per day)</label>
+                <input type="number" name="price" required>
+            </div>
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" name="location" required>
+            </div>
+            <div class="form-group">
+                <label for="availability">Availability</label>
+                <input type="date" name="availability" required>
+            </div>
+            <div class="form-group">
+                <label for="image">Image</label>
+                <input type="file" name="image" accept="image/*" required>
+            </div>
+            <button type="submit">List Tool</button>
+        </form>
+    </div>
+    <%- include('partials/footer') %>
+</body>
+</html>

@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: one-stop-tool-shop
+    env: node
+    buildCommand: "npm install"
+    startCommand: "node app.js"
+    envVars:
+      - key: MONGO_URI
+        value: your_mongo_db_uri
+      - key: STRIPE_SECRET_KEY
+        value: your_stripe_secret_key
+      - key: STRIPE_PUBLIC_KEY
+        value: your_stripe_public_key
+      - key: SECRET
+        value: your_secret_key
